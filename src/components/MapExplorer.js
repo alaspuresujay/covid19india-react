@@ -14,7 +14,12 @@ import {
   STATISTIC_CONFIGS,
   UNKNOWN_DISTRICT_KEY,
 } from '../constants';
-import {formatNumber, getStatistic, retry} from '../utils/commonFunctions';
+import {
+  formatNumber,
+  getStatistic,
+  retry,
+  toTitleCase,
+} from '../utils/commonFunctions';
 
 import {
   ArrowLeftIcon,
@@ -357,20 +362,21 @@ function MapExplorer({
 
           <div className="switch-statistic fadeInUp" style={trail[5]}>
             {mapStatistics.map((statistic) => (
-              <div
-                key={statistic}
-                className={classnames(
-                  'toggle',
-                  'statistic-option',
-                  `is-${statistic}`,
-                  {
-                    'is-highlighted': mapStatistic === statistic,
-                  }
-                )}
-                onClick={setMapStatistic.bind(this, statistic)}
-              >
-                <DotFillIcon />
-              </div>
+              <Tooltip message={toTitleCase(statistic)} hold key={statistic}>
+                <div
+                  className={classnames(
+                    'toggle',
+                    'statistic-option',
+                    `is-${statistic}`,
+                    {
+                      'is-highlighted': mapStatistic === statistic,
+                    }
+                  )}
+                  onClick={setMapStatistic.bind(this, statistic)}
+                >
+                  <DotFillIcon />
+                </div>
+              </Tooltip>
             ))}
           </div>
         </div>
